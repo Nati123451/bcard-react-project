@@ -1,0 +1,133 @@
+@media(min-width: 776px) {
+    .register-box .formWrap {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cards .card {
+        animation-range: entry 0% cover 30%;
+    }
+}
+
+
+@media(max-width: 1400px) {
+    section .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* larger phones */
+@media(max-width: 1024px) {
+
+    /* cards */
+    section .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    section .cards .card .card-data {
+        overflow-y: hidden;
+    }
+}
+
+/* landscape */
+@media((max-width: 1280px) and (max-height: 800px)) {
+    section .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media(max-width: 991px) {
+
+    /* navbar */
+    nav .form-search {
+        position: absolute;
+        left: 50%;
+        top: 10px;
+        transform: translate(-50%, 0);
+    }
+
+
+    html .card-data-solo {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2rem;
+    }
+
+    .card-data-solo .cardHero {
+        border-bottom: 2px solid #ccc;
+    }
+
+    .footerWraper {
+        height: 140px;
+        position: relative;
+    }
+
+    .card-data-solo img {
+        margin-bottom: 2rem;
+    }
+
+    html #map {
+        height: 500px !important;
+    }
+
+    nav .loginNav {
+        transform: translateY(-10px);
+        padding-left: 12px;
+    }
+
+
+    /* about */
+    .podiumImg,
+    .podium {
+        width: 90%;
+    }
+}
+
+
+
+@media(max-width: 776px) {
+
+    /* cards */
+    section .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* medium phones */
+@media(max-width: 691px) {
+    .techs {
+        width: 100%;
+        transform: rotateX(0) rotateY(0) !important;
+    }
+
+    .about-wraper {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        margin: 0 auto;
+    }
+
+    .analyst {
+        width: 100%;
+    }
+
+}
+
+/* Phones */
+@media(max-width: 576px) {
+
+    /* navbar */
+    nav .form-search {
+        width: 70%;
+        right: 10px;
+        top: 87%;
+        z-index: 2;
+        transform: translate(-30%, -100%);
+    }
+
+    /* cards */
+    section .cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
