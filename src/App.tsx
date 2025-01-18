@@ -18,7 +18,7 @@ import MyCards from './components/MyCards';
 import CardData from './components/CardData';
 import Crm from './components/Crm';
 import EditUser from './components/EditUser';
-import EditCard from './components/EditCard';
+
 
 
 

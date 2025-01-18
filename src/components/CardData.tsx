@@ -15,7 +15,7 @@ const CardData: FunctionComponent<CardDataProps> = () => {
             .catch((err) => console.log(err));
     }, [cardId]);
 
-    const address = card ? `${card.address.city}, ${card.address.country}` : '';
+   
 
 
 
