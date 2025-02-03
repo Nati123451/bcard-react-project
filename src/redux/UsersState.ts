@@ -1,10 +1,8 @@
-import { User } from "../interfaces/User"
-
-
+import { User } from "../interfaces/User";
 
 // App State
 export class UsersState {
-    public Users: User[] = []
+    public users: User[] = [];
 }
 
 // Action Type
@@ -19,63 +17,62 @@ export enum UsersActionType {
 // Action
 export interface UsersAction {
     type: UsersActionType;
-    payload: any
+    payload: any;
 }
-
 
 // Action Creators
-export function addUserAction(User: User): UsersAction {
-    return { type: UsersActionType.CreateUser, payload: User }
+export function addUserAction(user: User): UsersAction {
+    return { type: UsersActionType.CreateUser, payload: user };
 }
 
-export function updateUserAction(User: User): UsersAction {
-    return { type: UsersActionType.UpdateUser, payload: User }
+export function updateUserAction(user: User): UsersAction {
+    return { type: UsersActionType.UpdateUser, payload: user };
 }
 
 export function deleteUserAction(_id: number): UsersAction {
-    return { type: UsersActionType.DeleteUser, payload: _id }
+    return { type: UsersActionType.DeleteUser, payload: _id };
 }
 
-export function setAllUsersAction(Users: User[]): UsersAction {
-    return { type: UsersActionType.SetAllUsers, payload: Users }
+export function setAllUsersAction(users: User[]): UsersAction {
+    return { type: UsersActionType.SetAllUsers, payload: users };
 }
 
 export function filterUsersAction(filteredUsers: User[]): UsersAction {
     return { type: UsersActionType.FilterUsers, payload: filteredUsers };
 }
 
-// reducer
-export function UsersReducer(currentState: UsersState = new UsersState(), action: UsersAction): UsersState {
-    const newState = { ...currentState, Users: [...currentState.Users] };
+// Reducer - שימוש ב-Map לאחסון המשתמשים בצורה יעילה יותר
+export function usersReducer(currentState: UsersState = new UsersState(), action: UsersAction): UsersState {
+    const newState = { ...currentState };
+    const usersMap = new Map(currentState.users.map(user => [user._id, user])); // משתמשים ב-Map לשיפור ביצועים
 
     switch (action.type) {
         case UsersActionType.CreateUser:
-            newState.Users.push(action.payload);
+            usersMap.set(action.payload._id, action.payload);
             break;
 
         case UsersActionType.UpdateUser:
-            const indexToUpdate = newState.Users.findIndex((User) => User._id === action.payload._id);
-            if (indexToUpdate !== -1) {
-                newState.Users[indexToUpdate] = action.payload;
-            }
+            usersMap.set(action.payload._id, action.payload);
             break;
 
         case UsersActionType.DeleteUser:
-            newState.Users = newState.Users.filter((User) => User._id !== action.payload);
+            usersMap.delete(action.payload);
             break;
 
         case UsersActionType.SetAllUsers:
-            newState.Users = action.payload;
+            usersMap.clear();
+            action.payload.forEach(user => usersMap.set(user._id, user));
             break;
 
         case UsersActionType.FilterUsers:
-            newState.Users = action.payload;
+            newState.users = action.payload;
             break;
 
         default:
             break;
     }
 
+    newState.users = Array.from(usersMap.values()); // מחזירים את ה-Map לאר array
     return newState;
 }
 
